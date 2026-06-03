@@ -15,12 +15,13 @@
 template <typename T>
 void OutputDebugMsg(const T* lpFormat, ...)
 {
-    std::conditional_t<std::is_same<T, char>::value, AnsiString, UnicodeString> pCommonStrBuffer{};
+//    std::conditional_t<std::is_same<T, char>::value, AnsiString, UnicodeString> pCommonStrBuffer{};
 
+    AnsiString  pCommonStrBuffer{};
     va_list arg_list{};
     va_start(arg_list, lpFormat);
     pCommonStrBuffer.vprintf(lpFormat, arg_list);
-    OutputDebugString((PTCHAR("调试信息: ") + pCommonStrBuffer).c_str());
+    OutputDebugStringA(("调试信息: " + pCommonStrBuffer).c_str());
     va_end(arg_list);
 }
 
@@ -63,6 +64,7 @@ T GetTargetValue(const uintptr_t* OffsetArray = nullptr, size_t ArrayLength = 0,
     // 最终地址
     currentAddr += OffsetArray[ArrayLength - 1];
 
+    OutputDebugMsg("最终地址 = %p", currentAddr);
     // 验证并返回
     if (!IsAddressValid(currentAddr))
         return T{};
