@@ -7,6 +7,15 @@
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
+// 调试开关：设置为 1 启用调试标记，设置为 0 禁用
+#define ENABLE_DEBUG_MARKER 1
+
+#if ENABLE_DEBUG_MARKER
+#define DEBUG_BEEP() MessageBeep(0)
+#else
+#define DEBUG_BEEP()
+#endif
+
 #define ENABLE_DEBUG_OUTPUT 1
 
 #if ENABLE_DEBUG_OUTPUT
@@ -15,7 +24,7 @@
 template <typename T>
 void OutputDebugMsg(const T* lpFormat, ...)
 {
-//    std::conditional_t<std::is_same<T, char>::value, AnsiString, UnicodeString> pCommonStrBuffer{};
+    // std::conditional_t<std::is_same<T, char>::value, AnsiString, UnicodeString> pCommonStrBuffer{};
 
     AnsiString  pCommonStrBuffer{};
     va_list arg_list{};
@@ -70,6 +79,12 @@ T GetTargetValue(const uintptr_t* OffsetArray = nullptr, size_t ArrayLength = 0,
         return T{};
     return *reinterpret_cast<T*>(currentAddr);
 }
+
+// 获取游戏模块名
+AnsiString GetGameModuleName(void);
+
+// 获取游戏基址
+uintptr_t GetGameBase(void);
 
 //---------------------------------------------------------------------------
 #endif

@@ -34,7 +34,7 @@ uintptr_t GetArmorValue()
 {
     int ArmorValue = GetTargetValue<int>(ArmorOffset, ARRAY_SIZE(ArmorOffset), GetRoleAddress());
 
-    printf("护甲 = %d 行号 = %d \r\n", ArmorValue, __LINE__);
+    OutputDebugMsg("护甲 = %d 行号 = %d \r\n", ArmorValue, __LINE__);
 
     return ArmorValue;
 }
@@ -45,7 +45,7 @@ VOID CALLBACK MainThreadFunc(HWND Hwnd, UINT Msg, UINT_PTR ID, DWORD Time)
     KillTimer(Hwnd, ID);
 
     DWORD ThreadID = GetCurrentThreadId();
-    printf("主线程代码 窗口句柄 = %p 线程ID = %lu 行号 = %d \r\n", Hwnd, ThreadID, __LINE__);
+    OutputDebugMsg("主线程代码 窗口句柄 = %p 线程ID = %lu 行号 = %d \r\n", Hwnd, ThreadID, __LINE__);
 
     GetArmorValue();
 }

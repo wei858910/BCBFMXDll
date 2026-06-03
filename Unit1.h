@@ -13,12 +13,10 @@
 class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
-    TButton* BtnAllocConsole;
-    TButton* BtnFreeConsole;
     TButton* BtnGetArmor;
-    void __fastcall BtnAllocConsoleClick(TObject* Sender);
-    void __fastcall BtnFreeConsoleClick(TObject* Sender);
+    TButton *BtnGetGameBaseAddress;
     void __fastcall BtnGetArmorClick(TObject* Sender);
+    void __fastcall BtnGetGameBaseAddressClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
     __fastcall TForm1(TComponent* Owner);

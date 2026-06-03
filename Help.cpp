@@ -47,3 +47,34 @@ bool IsAddressValid(uintptr_t address)
     // 必须是已提交且可读的内存
     return (mbi.State == MEM_COMMIT) && ((mbi.Protect & (PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE)) != 0);
 }
+
+// 获取游戏模块名
+AnsiString GetGameModuleName(void)
+{
+    // AnsiString ExeName = Application->ExeName; // VCL 框架中使用
+
+    static AnsiString GameModuleName;
+
+    if (GameModuleName.IsEmpty())
+    {
+        auto ExeName = GetModuleName(0); // FMX 框架中使用
+        GameModuleName = ExtractFileName(ExeName);
+    }
+
+    OutputDebugMsg("游戏模块名: %s", GameModuleName.c_str());
+
+    return GameModuleName;
+}
+
+// 获取游戏基址
+uintptr_t GetGameBase(void)
+{
+    static uintptr_t  GameBaseAddress{};
+
+    if (0 == GameBaseAddress)
+    {
+        GameBaseAddress = reinterpret_cast<uintptr_t>(GetModuleHandleA(GetGameModuleName().c_str()));
+    }
+    OutputDebugMsg("游戏基址 = %p", GameBaseAddress);
+    return GameBaseAddress;
+}
