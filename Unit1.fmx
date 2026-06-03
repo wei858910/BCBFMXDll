@@ -8,4 +8,20 @@ object Form1: TForm1
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   DesignerMasterStyle = 0
+  object BtnAllocConsole: TButton
+    Position.X = 72.000000000000000000
+    Position.Y = 56.000000000000000000
+    TabOrder = 0
+    Text = #25171#24320#25511#21046#21488
+    TextSettings.Trimming = None
+    OnClick = BtnAllocConsoleClick
+  end
+  object BtnFreeConsole: TButton
+    Position.X = 184.000000000000000000
+    Position.Y = 56.000000000000000000
+    TabOrder = 1
+    Text = #20851#38381#25511#21046#21488
+    TextSettings.Trimming = None
+    OnClick = BtnFreeConsoleClick
+  end
 end
